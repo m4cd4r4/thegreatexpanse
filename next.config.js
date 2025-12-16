@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       'spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com',
+      'thespacedevs-prod.nyc3.digitaloceanspaces.com',
       'img.youtube.com',
       'i.ytimg.com'
     ],
