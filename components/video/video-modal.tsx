@@ -167,7 +167,7 @@ export function VideoModal({ video, isOpen, onClose }: VideoModalProps): JSX.Ele
 
           {/* Category Badge */}
           <div className="mb-4 flex items-center gap-2">
-            <Badge variant="default" className="capitalize">
+            <Badge variant="tbd" className="capitalize">
               {video.category}
             </Badge>
           </div>

@@ -20,7 +20,7 @@ export interface VehicleCardProps {
  *
  * Features:
  * - Vehicle image
- * - Name and manufacturer
+ * - Name and provider
  * - Key specifications (height, mass, capacity)
  * - Launch statistics
  * - Success rate badge
@@ -50,11 +50,13 @@ export function VehicleCard({ vehicle, variant = 'default', className }: Vehicle
       case 'active':
         return 'success';
       case 'retired':
-        return 'default';
+        return 'tbd';
       case 'development':
         return 'upcoming';
+      case 'planned':
+        return 'upcoming';
       default:
-        return 'default';
+        return 'tbd';
     }
   };
 
@@ -102,14 +104,14 @@ export function VehicleCard({ vehicle, variant = 'default', className }: Vehicle
             {vehicle.name}
           </CardTitle>
 
-          {/* Manufacturer and Status */}
+          {/* Provider and Status */}
           <CardDescription className="flex flex-col items-center gap-2">
-            <span>{vehicle.manufacturer.name}</span>
+            <span>{vehicle.provider.name}</span>
             <div className="flex items-center gap-2">
               <Badge variant={getStatusBadgeVariant(vehicle.status)} className="capitalize">
                 {vehicle.status}
               </Badge>
-              {vehicle.reusable && (
+              {vehicle.specs.reusable && (
                 <Badge variant="success">
                   <TrendingUp className="h-3 w-3 mr-1" />
                   Reusable
@@ -148,19 +150,6 @@ export function VehicleCard({ vehicle, variant = 'default', className }: Vehicle
                       {ageMode === 'explorer'
                         ? `${Math.round(vehicle.specs.mass / 1000)}t`
                         : `${vehicle.specs.mass.toLocaleString()} kg`}
-                    </span>
-                  </div>
-                )}
-
-                {/* Crew Capacity */}
-                {vehicle.specs.crewCapacity && vehicle.specs.crewCapacity > 0 && (
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2 text-stardust">
-                      <Users className="h-4 w-4" />
-                      <span>Crew</span>
-                    </div>
-                    <span className="font-medium text-starlight">
-                      {vehicle.specs.crewCapacity} {vehicle.specs.crewCapacity === 1 ? 'person' : 'people'}
                     </span>
                   </div>
                 )}

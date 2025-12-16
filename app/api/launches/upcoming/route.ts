@@ -11,11 +11,11 @@ export const revalidate = 300; // Revalidate every 5 minutes
  * Returns upcoming launches
  */
 export async function GET(request: NextRequest) {
-  try {
-    const searchParams = request.nextUrl.searchParams;
-    const limit = parseInt(searchParams.get('limit') || '10', 10);
-    const offset = parseInt(searchParams.get('offset') || '0', 10);
+  const searchParams = request.nextUrl.searchParams;
+  const limit = parseInt(searchParams.get('limit') || '10', 10);
+  const offset = parseInt(searchParams.get('offset') || '0', 10);
 
+  try {
     const client = getLL2Client();
     const response = await client.getUpcomingLaunches({ limit, offset });
 

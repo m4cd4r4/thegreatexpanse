@@ -53,7 +53,7 @@ export function UpcomingLaunches(): JSX.Element {
       {launches && (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {launches.slice(1, 7).map((launch) => (
-            <Card key={launch.id} interactive asChild>
+            <Card key={launch.id} interactive>
               <Link href={`/launches/${launch.id}`}>
                 <CardHeader>
                   <div className="mb-2 flex items-start justify-between">

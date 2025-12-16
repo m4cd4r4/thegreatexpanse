@@ -27,8 +27,6 @@ export const mockLaunches: Launch[] = [
     vehicle: {
       id: '80',
       name: 'Falcon 9 Block 5',
-      family: 'Falcon',
-      variant: 'Block 5',
       provider: 'SpaceX',
     },
     launchSite: {
@@ -87,8 +85,6 @@ export const mockLaunches: Launch[] = [
     vehicle: {
       id: '134',
       name: 'Electron',
-      family: 'Electron',
-      variant: 'Standard',
       provider: 'Rocket Lab',
     },
     launchSite: {
@@ -130,9 +126,9 @@ export const mockLaunches: Launch[] = [
     slug: 'starship-flight-test',
     status: {
       id: '8',
-      name: 'To Be Confirmed',
-      abbrev: 'TBC',
-      description: 'Awaiting official confirmation',
+      name: 'TBD',
+      abbrev: 'TBD',
+      description: 'To be determined - awaiting confirmation',
     },
     net: new Date('2025-12-25T14:00:00.000Z'),
     windowStart: new Date('2025-12-25T14:00:00.000Z'),
@@ -146,8 +142,6 @@ export const mockLaunches: Launch[] = [
     vehicle: {
       id: '815',
       name: 'Starship',
-      family: 'Starship',
-      variant: 'Block 1',
       provider: 'SpaceX',
     },
     launchSite: {
@@ -206,8 +200,6 @@ export const mockLaunches: Launch[] = [
     vehicle: {
       id: '194',
       name: 'Ariane 6',
-      family: 'Ariane',
-      variant: '62',
       provider: 'Arianespace',
     },
     launchSite: {
@@ -265,8 +257,6 @@ export const mockLaunches: Launch[] = [
     vehicle: {
       id: '15',
       name: 'Falcon Heavy',
-      family: 'Falcon',
-      variant: 'Heavy',
       provider: 'SpaceX',
     },
     launchSite: {

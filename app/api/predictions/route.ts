@@ -97,8 +97,7 @@ function generatePrediction(closure: RoadClosure): LaunchPrediction {
     predictedVehicle: {
       id: '80',
       name: 'Starship',
-      family: 'Starship',
-      variant: 'Block 1',
+      provider: 'SpaceX',
     },
     reasoning,
     algorithmVersion: '1.0.0-mvp',

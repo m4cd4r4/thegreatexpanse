@@ -16,7 +16,9 @@
       "Bash(npx playwright test:*)",
       "Bash(curl:*)",
       "Bash(pkill:*)",
-      "Bash(python -m json.tool:*)"
+      "Bash(python -m json.tool:*)",
+      "Bash(vercel --yes:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
