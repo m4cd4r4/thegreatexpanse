@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base Colors */
+    --color-void: #0a0e1a;
+    --color-cosmos: #0f1629;
+    --color-nebula: #1a1f36;
+    --color-stardust: #9ca3af;
+    --color-starlight: #f1f5f9;
+
+    /* Accent Colors */
+    --color-rocket-orange: #f97316;
+    --color-plasma-blue: #3b82f6;
+    --color-aurora-teal: #14b8a6;
+    --color-nebula-purple: #8b5cf6;
+    --color-solar-gold: #eab308;
+    --color-mars-red: #ef4444;
+
+    /* Transparency Levels */
+    --glass-light: rgba(255, 255, 255, 0.05);
+    --glass-medium: rgba(255, 255, 255, 0.1);
+    --glass-heavy: rgba(255, 255, 255, 0.15);
+  }
+
+  * {
+    @apply border-nebula;
+  }
+
+  body {
+    @apply bg-void text-starlight font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+
+  /* Focus visible styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-plasma-blue ring-offset-2 ring-offset-void;
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Glass effect utilities */
+  .glass-light {
+    background: var(--glass-light);
+    backdrop-filter: blur(8px);
+  }
+
+  .glass-medium {
+    background: var(--glass-medium);
+    backdrop-filter: blur(12px);
+  }
+
+  .glass-heavy {
+    background: var(--glass-heavy);
+    backdrop-filter: blur(16px);
+  }
+
+  /* Text gradient utilities */
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-rocket-orange to-solar-gold bg-clip-text text-transparent;
+  }
+
+  .text-gradient-space {
+    @apply bg-gradient-to-r from-plasma-blue via-nebula-purple to-aurora-teal bg-clip-text text-transparent;
+  }
+
+  /* Container utilities */
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
