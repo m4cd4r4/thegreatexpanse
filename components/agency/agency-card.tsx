@@ -43,16 +43,16 @@ export function AgencyCard({ agency, variant = 'default', className }: AgencyCar
   };
 
   // Get type badge variant
-  const getTypeBadgeVariant = (type: string) => {
+  const getTypeBadgeVariant = (type: string): 'upcoming' | 'success' | 'tbd' => {
     switch (type) {
       case 'government':
-        return 'default';
+        return 'tbd';
       case 'commercial':
         return 'success';
       case 'international':
         return 'upcoming';
       default:
-        return 'default';
+        return 'tbd';
     }
   };
 
