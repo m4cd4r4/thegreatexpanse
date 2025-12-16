@@ -126,13 +126,14 @@ export function AgencyRow(): JSX.Element {
               className="group relative aspect-square overflow-hidden rounded-lg bg-cosmos p-6 transition-all hover:scale-105 hover:bg-nebula hover:shadow-lg hover:shadow-plasma-blue/20"
             >
               {/* Agency Logo */}
-              <div className="relative h-full w-full">
+              <div className="relative h-full w-full !pointer-events-none">
                 <Image
                   src={agency.logo}
                   alt={agency.shortName || agency.name}
                   fill
-                  className="object-contain p-2 transition-transform group-hover:scale-110"
+                  className="object-contain p-2 transition-transform group-hover:scale-110 !pointer-events-none"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 12.5vw"
+                  style={{ pointerEvents: 'none' }}
                 />
               </div>
 

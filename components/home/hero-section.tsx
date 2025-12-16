@@ -20,7 +20,7 @@ export function HeroSection(): JSX.Element {
       <Starfield starCount={ageMode === 'explorer' ? 150 : 200} />
 
       {/* Content */}
-      <div className="container-custom relative z-10 py-20 text-center">
+      <div className="container-custom relative z-10 py-20 text-center min-h-[600px] flex flex-col justify-center">
         {isLoading && (
           <div className="flex flex-col items-center gap-4">
             <Spinner size="large" />
