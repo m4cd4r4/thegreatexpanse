@@ -33,17 +33,21 @@ export function Header(): JSX.Element {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-nebula glass-medium">
+    <header role="banner" className="sticky top-0 z-50 w-full border-b border-nebula glass-medium">
       <div className="container-custom">
         <div className="flex h-16 items-center justify-between md:h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Rocket className="h-6 w-6 text-rocket-orange" />
+          <Link
+            href="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            aria-label="RocketWatch home"
+          >
+            <Rocket className="h-6 w-6 text-rocket-orange" aria-hidden="true" />
             <span className="font-display text-xl font-bold text-starlight">RocketWatch</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
             {visibleLinks.map((link) => (
               <Link
                 key={link.href}
@@ -52,6 +56,7 @@ export function Header(): JSX.Element {
                   'text-sm font-medium transition-colors hover:text-starlight',
                   pathname === link.href ? 'text-starlight' : 'text-stardust'
                 )}
+                aria-current={pathname === link.href ? 'page' : undefined}
               >
                 {link.label}
               </Link>
@@ -69,9 +74,11 @@ export function Header(): JSX.Element {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden rounded-lg p-2 text-stardust hover:bg-white/5 hover:text-starlight transition-colors"
-              aria-label="Toggle menu"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
             </button>
           </div>
         </div>

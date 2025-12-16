@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, TrendingUp, MapPin, Calendar, Info, Target } from 'lucide-react';
 import { format } from 'date-fns';
@@ -23,9 +24,62 @@ interface PredictionModalProps {
  * - Displays prediction with confidence percentage
  * - Shows reasoning and algorithm details
  * - Age-adapted content
+ * - Focus trap for accessibility
+ * - ESC key to close
  */
 export function PredictionModal({ closure, isOpen, onClose }: PredictionModalProps): JSX.Element {
   const { ageMode } = useUserPreferences();
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  // Focus trap and initial focus
+  useEffect(() => {
+    if (!isOpen || !modalRef.current) return;
+
+    const modalElement = modalRef.current;
+    const focusableElements = modalElement.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Focus first element when modal opens
+    firstElement?.focus();
+
+    // Trap focus within modal
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return;
+
+      if (event.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    modalElement.addEventListener('keydown', handleTab as EventListener);
+    return () => modalElement.removeEventListener('keydown', handleTab as EventListener);
+  }, [isOpen]);
 
   if (!closure) return <></>;
 
@@ -53,6 +107,7 @@ export function PredictionModal({ closure, isOpen, onClose }: PredictionModalPro
             exit={{ opacity: 0 }}
             onClick={onClose}
             className="fixed inset-0 z-50 bg-void/80 backdrop-blur-sm"
+            aria-hidden="true"
           />
 
           {/* Modal */}
@@ -63,6 +118,10 @@ export function PredictionModal({ closure, isOpen, onClose }: PredictionModalPro
             className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2"
           >
             <div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
               className={cn(
                 'mx-4 rounded-2xl border border-plasma-blue/20 bg-cosmos shadow-2xl',
                 'max-h-[90vh] overflow-y-auto'
@@ -72,8 +131,8 @@ export function PredictionModal({ closure, isOpen, onClose }: PredictionModalPro
               <div className="flex items-start justify-between border-b border-nebula p-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="h-6 w-6 text-plasma-blue" />
-                    <h2 className="text-2xl font-bold text-starlight">
+                    <TrendingUp className="h-6 w-6 text-plasma-blue" aria-hidden="true" />
+                    <h2 id="modal-title" className="text-2xl font-bold text-starlight">
                       {ageMode === 'explorer'
                         ? '🔮 Launch Prediction'
                         : ageMode === 'cadet'
@@ -87,8 +146,8 @@ export function PredictionModal({ closure, isOpen, onClose }: PredictionModalPro
                     </Badge>
                   )}
                 </div>
-                <Button variant="ghost" size="small" onClick={onClose}>
-                  <X className="h-5 w-5" />
+                <Button variant="ghost" size="small" onClick={onClose} aria-label="Close modal">
+                  <X className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </div>
 

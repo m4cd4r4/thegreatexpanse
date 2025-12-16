@@ -52,18 +52,25 @@ export function MobileMenu(): JSX.Element {
   );
 
   return (
-    <div className="fixed inset-0 top-16 z-40 md:hidden">
+    <div
+      id="mobile-menu"
+      className="fixed inset-0 top-16 z-40 md:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile navigation menu"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-void/80 backdrop-blur-sm"
         onClick={() => setMobileMenuOpen(false)}
+        aria-label="Close menu"
       />
 
       {/* Menu Content */}
       <div className="relative h-full bg-cosmos border-t border-nebula">
         <div className="flex flex-col h-full">
           {/* Navigation Links */}
-          <nav className="flex-1 p-6 space-y-2">
+          <nav className="flex-1 p-6 space-y-2" aria-label="Mobile navigation">
             {visibleLinks.map((link) => (
               <Link
                 key={link.href}
@@ -74,6 +81,7 @@ export function MobileMenu(): JSX.Element {
                     ? 'bg-plasma-blue/20 text-plasma-blue'
                     : 'text-stardust hover:bg-white/5 hover:text-starlight'
                 )}
+                aria-current={pathname === link.href ? 'page' : undefined}
               >
                 {link.label}
               </Link>
