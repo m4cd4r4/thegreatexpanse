@@ -28,3 +28,11 @@ export interface LaunchPrediction {
   algorithmVersion: string;
   generatedAt: Date;
 }
+
+/**
+ * Active road closures with predictions (API response)
+ */
+export interface ActivePredictionsResponse {
+  roadClosures: RoadClosure[];
+  lastUpdated: Date;
+}

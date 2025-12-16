@@ -6,6 +6,7 @@ import { AgeModeProvider } from '@/lib/providers/age-mode-provider';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { MobileMenu } from '@/components/layout/mobile-menu';
+import { PredictionTicker } from '@/components/ui/prediction-ticker';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
           <AgeModeProvider>
             <div className="flex min-h-screen flex-col">
               <Header />
+              <PredictionTicker />
               <MobileMenu />
               <main className="flex-1">{children}</main>
               <Footer />
