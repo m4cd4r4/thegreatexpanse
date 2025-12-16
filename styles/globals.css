@@ -23,6 +23,40 @@
     --glass-light: rgba(255, 255, 255, 0.05);
     --glass-medium: rgba(255, 255, 255, 0.1);
     --glass-heavy: rgba(255, 255, 255, 0.15);
+
+    /* Age Mode Variables - Default (Cadet) */
+    --age-button-scale: 1;
+    --age-text-scale: 1;
+    --age-spacing-scale: 1;
+    --age-card-padding: 1.5rem;
+    --age-touch-target: 2.5rem;
+  }
+
+  /* Explorer Mode (5-8): Larger, friendlier */
+  [data-age-mode="explorer"] {
+    --age-button-scale: 1.2;
+    --age-text-scale: 1.1;
+    --age-spacing-scale: 1.15;
+    --age-card-padding: 2rem;
+    --age-touch-target: 3rem;
+  }
+
+  /* Cadet Mode (9-13): Standard (default) */
+  [data-age-mode="cadet"] {
+    --age-button-scale: 1;
+    --age-text-scale: 1;
+    --age-spacing-scale: 1;
+    --age-card-padding: 1.5rem;
+    --age-touch-target: 2.5rem;
+  }
+
+  /* Mission Control Mode (14+): Compact, data-dense */
+  [data-age-mode="missionControl"] {
+    --age-button-scale: 0.95;
+    --age-text-scale: 0.95;
+    --age-spacing-scale: 0.9;
+    --age-card-padding: 1.25rem;
+    --age-touch-target: 2.25rem;
   }
 
   * {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { QueryProvider } from '@/lib/providers/query-provider';
+import { AgeModeProvider } from '@/lib/providers/age-mode-provider';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { MobileMenu } from '@/components/layout/mobile-menu';
@@ -46,12 +47,14 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen bg-void text-starlight antialiased">
         <QueryProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <MobileMenu />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <AgeModeProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <MobileMenu />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </AgeModeProvider>
         </QueryProvider>
       </body>
     </html>
