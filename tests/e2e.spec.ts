@@ -45,8 +45,8 @@ test.describe('RocketWatch E2E Tests', () => {
     // Check hero section - wait for the launch data to load
     await expect(page.getByText('Falcon 9 | Starlink Mission')).toBeVisible({ timeout: 10000 });
 
-    // Check launch details are present
-    await expect(page.getByText('SpaceX')).toBeVisible();
+    // Check launch details are present - use more specific text to avoid ambiguity
+    await expect(page.getByText('SpaceX • Falcon 9 Block 5')).toBeVisible();
     await expect(page.getByText('Kennedy Space Center, FL')).toBeVisible();
 
     // Check upcoming launches section
@@ -91,8 +91,8 @@ test.describe('RocketWatch E2E Tests', () => {
     const filterButtons = page.locator('button').filter({ hasText: /^(All Videos|Live|Launches|Educational|Highlights|Interviews)$/ });
     await expect(filterButtons.first()).toBeVisible();
 
-    // Test filter switching - use more specific selector for the button
-    const liveFilterButton = page.locator('button').filter({ hasText: /^Live$/ });
+    // Test filter switching - use more specific selector that accounts for badge
+    const liveFilterButton = page.locator('button').filter({ hasText: /Live/ });
     await liveFilterButton.click();
     await expect(liveFilterButton).toHaveClass(/bg-rocket-orange/);
 
@@ -117,12 +117,12 @@ test.describe('RocketWatch E2E Tests', () => {
     // Check page title - handle age-mode variations
     await expect(page.getByRole('heading', { name: /(Space Agencies|Space Companies)/i })).toBeVisible();
 
-    // Check type filter buttons exist
-    const filterButtons = page.locator('button').filter({ hasText: /^(all|government|commercial|international)$/i });
+    // Check type filter buttons exist - account for counts in button text
+    const filterButtons = page.locator('button').filter({ hasText: /(all|government|commercial|international)/i });
     await expect(filterButtons.first()).toBeVisible();
 
-    // Test filter switching
-    const commercialButton = page.locator('button').filter({ hasText: /^commercial$/i });
+    // Test filter switching - account for counts in button text
+    const commercialButton = page.locator('button').filter({ hasText: /commercial/i });
     await commercialButton.click();
 
     // Check agency cards are present
