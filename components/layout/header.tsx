@@ -1,12 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
 import { useUIStore } from '@/lib/stores/ui';
 import { useUserPreferences } from '@/lib/stores/preferences';
 import { AgeModeToggle } from './age-mode-toggle';
-import { Rocket, Menu, X } from 'lucide-react';
+import { ArcadeModal } from '../arcade/arcade-modal';
+import { Rocket, Menu, X, Gamepad2 } from 'lucide-react';
 
 interface NavLink {
   href: string;
@@ -26,6 +28,7 @@ export function Header(): JSX.Element {
   const pathname = usePathname();
   const { mobileMenuOpen, setMobileMenuOpen } = useUIStore();
   const { ageMode } = useUserPreferences();
+  const [arcadeOpen, setArcadeOpen] = useState(false);
 
   // Filter nav links based on age mode
   const visibleLinks = NAV_LINKS.filter(
@@ -65,6 +68,17 @@ export function Header(): JSX.Element {
 
           {/* Right Section */}
           <div className="flex items-center gap-4">
+            {/* Arcade Button */}
+            <button
+              onClick={() => setArcadeOpen(true)}
+              className="hidden sm:flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stardust hover:bg-white/5 hover:text-starlight transition-colors"
+              aria-label="Play Asteroids"
+              title="Play while you wait!"
+            >
+              <Gamepad2 className="h-4 w-4" />
+              <span className="hidden md:inline">Arcade</span>
+            </button>
+
             {/* Age Mode Toggle (Desktop) */}
             <div className="hidden lg:block">
               <AgeModeToggle />
@@ -83,6 +97,9 @@ export function Header(): JSX.Element {
           </div>
         </div>
       </div>
+
+      {/* Arcade Modal */}
+      <ArcadeModal isOpen={arcadeOpen} onClose={() => setArcadeOpen(false)} />
     </header>
   );
 }
