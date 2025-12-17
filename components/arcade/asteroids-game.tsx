@@ -5,6 +5,7 @@ import { useUserPreferences } from '@/lib/stores/preferences';
 
 interface AsteroidsGameProps {
   onClose: () => void;
+  onBack: () => void;
 }
 
 interface Ship {
@@ -31,7 +32,7 @@ interface Bullet {
   life: number;
 }
 
-export function AsteroidsGame({ onClose }: AsteroidsGameProps): JSX.Element {
+export function AsteroidsGame({ onClose, onBack }: AsteroidsGameProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -340,6 +341,14 @@ export function AsteroidsGame({ onClose }: AsteroidsGameProps): JSX.Element {
     <div className="flex flex-col items-center gap-4 p-4 sm:p-6 bg-void rounded-lg">
       {/* Header */}
       <div className="flex items-center justify-between w-full max-w-[800px]">
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-stardust hover:text-starlight transition-colors"
+          aria-label="Back to game selection"
+        >
+          ← Back
+        </button>
         <div className="flex items-center gap-6">
           <div className="text-starlight">
             <span className="text-sm text-stardust">Score:</span>{' '}
@@ -374,13 +383,22 @@ export function AsteroidsGame({ onClose }: AsteroidsGameProps): JSX.Element {
             <div className="text-center space-y-4">
               <h2 className="text-4xl font-bold text-starlight">Game Over!</h2>
               <p className="text-xl text-stardust">Final Score: {score}</p>
-              <button
-                type="button"
-                onClick={handleRestart}
-                className="px-6 py-3 bg-rocket-orange text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-              >
-                Play Again
-              </button>
+              <div className="flex gap-3 justify-center">
+                <button
+                  type="button"
+                  onClick={handleRestart}
+                  className="px-6 py-3 bg-rocket-orange text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all"
+                >
+                  Play Again
+                </button>
+                <button
+                  type="button"
+                  onClick={onBack}
+                  className="px-6 py-3 bg-nebula text-starlight rounded-lg font-semibold hover:bg-opacity-90 transition-all"
+                >
+                  Game Menu
+                </button>
+              </div>
             </div>
           </div>
         )}
