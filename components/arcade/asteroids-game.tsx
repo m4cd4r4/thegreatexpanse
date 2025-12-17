@@ -332,7 +332,7 @@ export function AsteroidsGame({ onClose }: AsteroidsGameProps): JSX.Element {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-6 bg-void rounded-lg">
+    <div className="flex flex-col items-center gap-4 p-4 sm:p-6 bg-void rounded-lg">
       {/* Header */}
       <div className="flex items-center justify-between w-full max-w-[800px]">
         <div className="flex items-center gap-6">
@@ -356,11 +356,11 @@ export function AsteroidsGame({ onClose }: AsteroidsGameProps): JSX.Element {
       </div>
 
       {/* Canvas */}
-      <div className="relative">
+      <div className="relative w-full max-w-[800px]">
         <canvas
           ref={canvasRef}
-          className="border-2 border-nebula rounded-lg"
-          style={{ maxWidth: '100%', height: 'auto' }}
+          className="border-2 border-nebula rounded-lg w-full"
+          style={{ maxWidth: '100%', height: 'auto', aspectRatio: '4/3' }}
         />
 
         {/* Overlays */}

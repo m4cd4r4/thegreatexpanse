@@ -25,10 +25,10 @@ export function ArcadeModal({ isOpen, onClose }: ArcadeModalProps): JSX.Element 
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void/95 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void/95 backdrop-blur-sm overflow-auto"
       onClick={onClose}
     >
-      <div onClick={(e) => e.stopPropagation()}>
+      <div onClick={(e) => e.stopPropagation()} className="max-h-[95vh] overflow-auto">
         <AsteroidsGame onClose={onClose} />
       </div>
     </div>
