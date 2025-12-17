@@ -32,7 +32,9 @@
       "Bash(echo:*)",
       "Bash(done)",
       "Bash(vercel --version:*)",
-      "Bash(vercel:*)"
+      "Bash(vercel:*)",
+      "Bash(node test-arcade.mjs:*)",
+      "Bash(node test-production.mjs:*)"
     ]
   }
 }
